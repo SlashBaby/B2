@@ -1,0 +1,33 @@
+<view class="container">
+	<view class="header">
+		发现
+	</view>
+	<view>
+		<view>
+			<button bind:tap="onShowImg">图片</button>
+			<button bind:tap="onShowStroke">笔触</button>
+			<button bind:tap="onShowSample">取样</button>	
+		</view>
+		<view wx:if="{{showImg}}">
+			<block wx:for="{{goods}}" wx:key="{{index}}">
+				<view bind:tap="showDetail" id="{{index}}">
+					{{item.name}}: 点击查看详情
+				</view>
+			</block>
+		</view>
+		<view wx:if="{{showStroke}}" wx:key="{{index}}"> 
+			<block wx:for="{{goods}}">
+				<view bind:tap="showDetail" id="{{index}}">
+				{{item.name}}: 点击查看详情
+				</view>
+			</block>
+		</view>
+		<view wx:if="{{showSample}}" wx:key="{{index}}">
+			<block wx:for="{{goods}}">
+				<view bind:tap="showDetail" id="{{index}}">
+				{{item.name}}: 点击查看详情
+				</view>
+			</block>
+		</view>
+	</view>
+</view>

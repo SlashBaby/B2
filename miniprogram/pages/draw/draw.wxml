@@ -1,0 +1,29 @@
+<view class="container">
+  <view>
+    <text>图片</text>
+    <view>
+      <radio-group class="radio-group" bindchange="imgChange">
+        <label class="radio" wx:for="{{imgs}}" wx:key="{{index}}">
+          <radio value="{{item.url}}" checked="{{item.checked}}" />{{item.name}}
+        </label>
+      </radio-group>
+    </view>
+  </view>
+  <view>
+    <text>笔触</text>
+    <radio-group class="radio-group" bindchange="strokeChange">
+      <label class="radio" wx:for="{{strokes}}" wx:key="{{index}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
+      </label>
+    </radio-group>
+  </view>
+  <view>
+    <text>取样方法</text>
+    <radio-group class="radio-group" bindchange="sampleChange">
+      <label class="radio" wx:for="{{samples}}" wx:key="{{index}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
+      </label>
+    </radio-group>
+  </view>
+  <button bind:tap="draw">绘制</button>
+</view>

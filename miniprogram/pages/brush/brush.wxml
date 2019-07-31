@@ -1,0 +1,11 @@
+<view>
+	<view>
+		<canvas canvas-id="canvas" style="width:{{canvasWidth}}rpx;height:{{canvasHeight}}rpx;"></canvas>
+	</view>
+	<button wx:if="{{!isRunning}}" bind:tap="start">开始</button>
+	<view wx:if="{{isDone}}">
+		<button bind:tap="onSaveImage">保留</button>
+		<button bind:tap="onCancel">放弃</button>
+	</view>
+	<image hidden bind:load="draw" src="{{url}}"></image>
+</view>

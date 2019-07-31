@@ -1,0 +1,83 @@
+{
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"enhance": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"appid": "wxfa468967fadbc4a5",
+	"projectname": "Brush",
+	"libVersion": "2.2.5",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "db guide",
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "pages/brush/brush",
+					"pathName": "pages/brush/brush",
+					"query": "url=http://culturecloud.img-cn-hangzhou.aliyuncs.com/H5/201811169167QuK5iWF4r5Yrf8VlVm1oNHuaQNdKsh.jpg&sample=BFS&stroke=星月夜",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/discover/discover",
+					"pathName": "pages/discover/discover",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/detail/detail",
+					"pathName": "pages/detail/detail",
+					"query": "id=88ad01f4-e2a6-4641-bd83-24b11ea48157",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/my/my",
+					"pathName": "pages/my/my",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}
