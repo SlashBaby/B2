@@ -1,61 +1,88 @@
 import { GoodsModel } from "../../models/goods.js"
+import { LabelsModel } from "../../models/labels.js"
 const goodsModel = new GoodsModel();
+const labelsModel = new LabelsModel();
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-    showImg: true,
-    showSample: false,
-    showStroke: false,
-    goods: []
+    goods: [],
+    labels: [],
+    selectedItem: null,
+    type: '',
+    selectedLabels: [],
+    loading: true
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: async function (options) {
-    const goods = await goodsModel.get('img');
-    console.log(goods);
-    this.setData({
-      goods: goods.data
+  onLoad: function(options) {
+    this.data.type = options.type;
+    const goods = goodsModel.get(this.data.type);
+    const labels = labelsModel.get(this.data.type);
+    wx.showLoading({
+      title: '加载中',
+    })
+    Promise.all([goods, labels]).then(res => {
+      this.setData({
+        goods: res[0].data,
+        labels: res[1].data,
+        loading: false
+      })
+      wx.hideLoading();
     })
   },
 
-  async onShowImg(e){
-    this.data.showImg = true;
-    this.data.showSample = false;
-    this.data.showStroke = false;
-    const goods = await goodsModel.get('img');
-    this.setData({
-      goods: goods.data
+  goodChange(e) {
+    const index = e.detail.value;
+    this.data.selectedItem = this.data.goods[index];
+  },
+
+  labelChange(e) {
+    this.data.selectedLabels = e.detail.value;
+  },
+
+  updateGoods() {
+    const goods = goodsModel.get(this.data.type, this.data.selectedLabels);
+    wx.showLoading({
+      title: '加载中',
+    })
+    goods.then(res => {
+      this.setData({
+        goods: res.data
+      })
+      wx.hideLoading();
     })
   },
 
-  async onShowSample(e){
-    console.log(e);
-    this.data.showSample = true;
-    this.data.showImg = false;
-    this.data.showStroke = false;
-    const goods = await goodsModel.get('sample');
-    this.setData({
-      goods: goods.data
+  onConfirm(e) {
+    if (!this.data.selectedItem) {
+      wx.showToast({
+        title: '请选择一个',
+        icon: 'none'
+      })
+      return;
+    }
+    const pages = getCurrentPages();
+    const prePage = pages[pages.length - 2];
+
+    if (this.data.type === 'img') {
+      prePage.setData({
+        'selectedImg': this.data.selectedItem
+      })
+    } else if (this.data.type === 'stroke') {
+      prePage.setData({
+        'selectedStroke': this.data.selectedItem
+      })
+    } else {
+      prePage.setData({
+        'selectedSample': this.data.selectedItem
+      })
+    }
+
+    wx.navigateBack({
+      delta: 1
     })
   },
 
-  async onShowStroke(e){
-    console.log(e);
-    this.data.showSample = false;
-    this.data.showImg = false;
-    this.data.showStroke = true;
-    const goods = await goodsModel.get('stroke');
-    this.setData({
-      goods: goods.data
-    })
-  },
-
-  showDetail(e){
+  showDetail(e) {
     const index = e.target.id;
     const id = this.data.goods[index]._id;
     wx.navigateTo({

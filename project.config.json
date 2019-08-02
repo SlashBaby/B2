@@ -21,7 +21,7 @@
 	},
 	"appid": "wxfa468967fadbc4a5",
 	"projectname": "Brush",
-	"libVersion": "2.2.5",
+	"libVersion": "2.8.0",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -41,40 +41,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": -1,
 			"list": [
 				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
-					"query": ""
+					"id": 1,
+					"name": "discover",
+					"pathName": "pages/discover/discover",
+					"query": "type=img",
+					"scene": null
 				},
 				{
 					"id": 2,
-					"name": "pages/brush/brush",
+					"name": "brush",
 					"pathName": "pages/brush/brush",
-					"query": "url=http://culturecloud.img-cn-hangzhou.aliyuncs.com/H5/201811169167QuK5iWF4r5Yrf8VlVm1oNHuaQNdKsh.jpg&sample=BFS&stroke=星月夜",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/discover/discover",
-					"pathName": "pages/discover/discover",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/detail/detail",
-					"pathName": "pages/detail/detail",
-					"query": "id=88ad01f4-e2a6-4641-bd83-24b11ea48157",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/my/my",
-					"pathName": "pages/my/my",
-					"query": "",
+					"query": "url=http://culturecloud.img-cn-hangzhou.aliyuncs.com/H5/201811169167QuK5iWF4r5Yrf8VlVm1oNHuaQNdKsh.jpg&stroke=星月夜&sample=BFS",
 					"scene": null
 				}
 			]

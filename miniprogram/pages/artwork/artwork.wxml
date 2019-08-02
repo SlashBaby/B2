@@ -1,0 +1,22 @@
+<view>
+    <view wx:if="{{artwork.length!==0}}">
+        <block wx:for="{{artworks}}" wx:key="{{index}}">
+            <view>
+                <view class="{{item.rotate === true ? 'rotation' : ''}}">
+                    <image src="{{item.path}}" mode="aspectFit" bindtap="onShowImage"></image>
+                </view>
+                <view class="row">
+                    <button open-type='share' data-path="{{item.path}}" data-rotate="{{item.rotate}}">分享</button>
+                    <button bind:tap="saveImageToLocal" id="{{item.path}}">保存到本地</button>
+                    <button bind:tap="delete" data-index="{{index}}">删除</button>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view wx:if="{{!loading && artworks.length==0}}">
+        <view>
+            还没有作品，快去创作吧。
+        </view>
+        <button bindtap="onCreate">去创作</button>
+    </view>
+</view>

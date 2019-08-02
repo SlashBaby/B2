@@ -1,5 +1,5 @@
-import { GoodsModel } from "../../models/goods.js"
-const goodsModel = new GoodsModel();
+import { DetailModel } from "../../models/details.js"
+const detailModel = new DetailModel();
 Page({
 
   data: {
@@ -7,11 +7,15 @@ Page({
   },
 
   onLoad: async function (options) {
-    const good = await goodsModel.getDetail(options.id);
-    const content = good.data.length === 0 ? "没有介绍" : good.data[0].content
+    wx.showLoading({
+      title: '加载中'
+    })
+    const detail = await detailModel.get(options.id);
+    const content = detail.data.length === 0 ? "没有介绍" : detail.data[0].content
     this.setData({
       content
     })
+    wx.hideLoading();
   },
 
 

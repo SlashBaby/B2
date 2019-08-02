@@ -1,108 +1,94 @@
-import { Brush } from '../../util/b2/brush.js'
-import { GoodsModel } from '../../models/goods.js'
-const goodsModel = new GoodsModel();
+import { B2 } from '../../util/b2/index.js'
+import { formatTime, formatNumber } from "../../util/util.js"
+import { ArtworksModel } from "../../models/artworks.js"
+import { FileModel } from "../../models/files.js"
+const artworksModel = new ArtworksModel();
+const fileModel = new FileModel();
 Page({
 
   data: {
     isDone: false,
     isRunning: false,
-    url: '',
-    sample: '',
-    stroke: '',
     canvasWidth: '',
     canvasHeight: '',
-    brush: null
+    b2: null,
+    loading: true,
+    style: '',
+    rotate: false
   },
 
   onLoad: function(options) {
-    this.data.brush = new Brush();
-    this.data.sample = options.sample;
-    this.data.stroke = options.stroke;
-    this.setData({
-      url: options.url
+    wx.showLoading({
+      title: '加载图片中'
     })
-  },
-
-  draw(e) {
-    const [canvasWidth, canvasHeight] = this.getContainer(e.detail.width, e.detail.height);
-    this.setData({
-      canvasWidth,
-      canvasHeight
-    })
-    this.data.brush.init('canvas', this.data.url, this.data.sample, this.data.stroke);
-    this.data.brush.size(canvasWidth / 2, canvasHeight / 2);
-    this.data.brush.run(this.finish);
-  },
-
-  finish() {
-    this.setData({
-      isDone: true
-    });
+    this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
+    //获得上下文信息
+    this.data.b2.getCanvasInfo()
+      .then(res => {// 更新页面数据
+        const { canvasWidth, canvasHeight, rotate } = res;
+        return new Promise((resolve, reject) => {
+          this.setData({
+            canvasWidth,
+            canvasHeight,
+            rotate
+          }, res => {
+            resolve(res);
+          })
+        })
+      })
+      .then(res => { //画图
+        return this.data.b2.drawImage();
+      })
+      .then(res => { //显示按钮
+        this.setData({
+          loading: false
+        })
+        wx.hideLoading();
+      })
   },
 
   start(e) {
-    this.data.brush.start();
     this.setData({
       isRunning: true
-    })
-  },
+    });
 
-  async onSaveImage(e) {
-    console.log('save1');
-    let res = await this.data.brush.getTmpUrl();
-    console.log('2');
-    const tempFilePath = res.tempFilePath;
-    res = await this.uploadImg(tempFilePath);
-    const fileID = res.fileID;
-    console.log('1')
-    goodsModel.addArtWork(fileID);
-  },
-
-  uploadImg(url) {
-    return new Promise((resovle, reject) => {
-      wx.cloud.uploadFile({
-        cloudPath: this.getFileName(),
-        filePath: url,
-        success: res => {
-          resovle(res);
-        },
-        fail: console.error
+    this.data.b2.loadingImageData()
+      .then(res => {
+        return this.data.b2.run(100, 100);
+      }).then(res => {
+        this.setData({
+          isDone: true
+        });
       })
-    })
 
+  },
+
+  onSaveImage(e) {
+    wx.showLoading({
+      title: '正在保存'
+    })
+    this.data.b2.getTempFilePath().then(res => {
+      return fileModel.add(res.tempFilePath, this.getFileName());
+    }).then(res => {
+      return artworksModel.add(res.fileID, this.data.rotate);
+    }).then(res => {
+      wx.hideLoading();
+      wx.showToast({
+        title: '保存成功'
+      })
+      this.onCancel();
+    })
   },
 
   getFileName() {
     const date = new Date();
-    const name = this.formatTime(date);
-    const index = Math.random(1000);
+    const name = formatTime(date);
     return `${name}.png`
-  },
-
-  formatTime(date) {
-    var year = date.getFullYear()
-    var month = date.getMonth() + 1
-    var day = date.getDate()
-
-    var hour = date.getHours()
-    var minute = date.getMinutes()
-    var second = date.getSeconds()
-
-    return [year, month, day].map(this.formatNumber).join('-') + [hour, minute, second].map(this.formatNumber).join('-')
-  },
-
-  formatNumber(n) {
-    n = n.toString()
-    return n[1] ? n : '0' + n
   },
 
   onCancel(e) {
     wx.navigateBack({
       delta: 1
     })
-  },
-
-  getContainer(width, height) {
-    return [500, 500]
   }
 })

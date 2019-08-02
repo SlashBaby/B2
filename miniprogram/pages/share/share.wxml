@@ -1,0 +1,5 @@
+<view>
+	<view class="{{rotate===true ? 'rotation' : ''}}">
+		<image src="{{path}}" mode="aspectFit"></image>
+	</view>
+</view>

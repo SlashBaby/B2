@@ -4,41 +4,31 @@ const goodsModel = new GoodsModel();
 Page({
 
   data: {
-    imgs: [],
-    strokes: [],
-    samples: [],
     selectedImg: null,
     selectedStroke: null,
     selectedSample: null
   },
 
-  onLoad: async function(options) {
-    const imgs = await goodsModel.get('img');
-    const strokes = await goodsModel.get('stroke');
-    const samples = await goodsModel.get('sample');
-    console.log(imgs, strokes, samples)
-    this.setData({
-      imgs: imgs.data,
-      strokes: strokes.data,
-      samples: samples.data
+  onLoad: function(options) {
+  },
+
+  onSelect:function(e){
+    const type = e.target.dataset.type;
+    wx.navigateTo({
+      url: `../discover/discover?type=${type}`
     })
   },
 
-  imgChange: function(e) {
-    this.data.selectedImg = e.detail.value;
-  },
-
-  strokeChange: function(e) {
-    this.data.selectedStroke = e.detail.value;
-  },
-
-  sampleChange: function(e) {
-    this.data.selectedSample = e.detail.value;
-  },
-
   draw: function(e) {
+    if(this.data.selectedImg === null || this.data.selectedStroke === null || this.data.selectedSample === null){
+      wx.showToast({
+        title: '三个都要选择',
+        icon: 'none'
+      })
+      return
+    }
     wx.navigateTo({
-      url: `../brush/brush?url=${this.data.selectedImg}&stroke=${this.data.selectedStroke}&sample=${this.data.selectedSample}`
+      url: `../brush/brush?url=${this.data.selectedImg.url}&stroke=${this.data.selectedStroke.name}&sample=${this.data.selectedSample.name}`
     })
   }
 })

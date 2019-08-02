@@ -1,7 +1,9 @@
-/* miniprogram/pages/discover/discover.wxss */
 .row{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	width:500rpx;
+}
+
+.rotation{
+	transform: rotate(-90deg);
 }

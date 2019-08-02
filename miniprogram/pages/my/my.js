@@ -1,74 +1,59 @@
-import { GoodsModel } from "../../models/goods.js"
-const goodsModel = new GoodsModel();
+// miniprogram/pages/my/my.js
 Page({
 
+  /**
+   * 页面的初始数据
+   */
   data: {
-    artworks: [],
-    aidlist: []
+
   },
 
-  onLoad: async function(options) {
-    const openid = await this.login();
-    const res = await goodsModel.getArtWorks();
-    this.data.aidlist = res.data.map(a => a._id);
-    const fileIds = res.data.map(a => a.fileid);
-    this.getImg(fileIds);
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
   },
 
-  login() {
-    return wx.cloud.callFunction({
-      name: 'login',
-    })
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
 
-  imgByFileId(fileID) {
-    return new Promise((resolve, reject) => {
-      wx.cloud.downloadFile({
-        fileID,
-        success: res => {
-          resolve(res);
-        },
-        fail: console.error
-      })
-    })
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
   },
 
-  getImg(fileIds) {
-    const promiseArr = [];
-    for (let id of fileIds) {
-      promiseArr.push(this.imgByFileId(id))
-    }
-    Promise.all(promiseArr).then(res => {
-      this.setData({
-        artworks: res.map((item, index) => ({
-          path: item.tempFilePath,
-          fileid: fileIds[index]
-        }))
-      })
-    });
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
   },
 
-  delete(e){
-      const fileid = e.target.dataset.fileid;
-      const index = e.target.dataset.index;
-      const aid = this.data.aidlist[index];
-      goodsModel.deleteArtWork(aid,fileid);
-      this.data.artworks.splice(index, 1);
-      this.setData({
-        artworks: this.data.artworks
-      })
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
   },
 
-  saveImageToLocal(e) {
-    wx.saveImageToPhotosAlbum({
-      filePath: e.target.id,
-      success(res) {}
-    })
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
   },
 
-  onShareAppMessage(e) {
-    return {
-      title: 'hello world'
-    }
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
   }
 })

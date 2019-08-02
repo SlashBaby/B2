@@ -1,29 +1,12 @@
 <view class="container">
-  <view>
-    <text>图片</text>
     <view>
-      <radio-group class="radio-group" bindchange="imgChange">
-        <label class="radio" wx:for="{{imgs}}" wx:key="{{index}}">
-          <radio value="{{item.url}}" checked="{{item.checked}}" />{{item.name}}
-        </label>
-      </radio-group>
+        <text bindtap="onSelect" data-type="img">图片</text>: {{selectedImg === null ? '未选择' : selectedImg.name}}
     </view>
-  </view>
-  <view>
-    <text>笔触</text>
-    <radio-group class="radio-group" bindchange="strokeChange">
-      <label class="radio" wx:for="{{strokes}}" wx:key="{{index}}">
-        <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
-      </label>
-    </radio-group>
-  </view>
-  <view>
-    <text>取样方法</text>
-    <radio-group class="radio-group" bindchange="sampleChange">
-      <label class="radio" wx:for="{{samples}}" wx:key="{{index}}">
-        <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.name}}
-      </label>
-    </radio-group>
-  </view>
-  <button bind:tap="draw">绘制</button>
+    <view>
+        <text bindtap="onSelect" data-type="stroke">笔触</text>: {{selectedStroke === null ? '未选择' : selectedStroke.name}}
+    </view>
+    <view>
+        <text bindtap="onSelect" data-type="sample">取样方法</text>: {{selectedSample === null ? '未选择' : selectedSample.name}}
+    </view>
+    <button bind:tap="draw">绘制</button>
 </view>
