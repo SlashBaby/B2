@@ -1,4 +1,30 @@
-.row{
-	display: flex;
-	flex-direction: row;
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.canvas-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin-top: 20rpx;
+}
+
+.start-btn {
+    position: absolute;
+    left: 285rpx;
+    bottom: 50rpx;
+}
+
+.save-btn {
+    position: absolute;
+    bottom: 50rpx;
+    left:150rpx;
+}
+
+.delete-btn {
+    position: absolute;
+    bottom: 50rpx;
+    right:150rpx;
 }

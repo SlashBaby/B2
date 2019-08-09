@@ -1,0 +1,28 @@
+.list-item{
+	display: flex;
+	flex-direction: row;
+	height: 100rpx;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.left{
+	width: 150rpx;
+}
+.right{
+	width: 50rpx;
+	margin-right: 30rpx;
+}
+
+.middle{
+	width: 400rpx;
+}
+
+.middle-item{
+	margin-left:5rpx;
+}
+
+.right-item{
+	display: block;
+	margin-left: 20rpx;
+}

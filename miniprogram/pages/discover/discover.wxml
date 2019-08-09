@@ -10,26 +10,23 @@
                 <view>数量：{{item.count}}</view>
             </label>
         </checkbox-group>
-        <button bind:tap="updateGoods" >更新</button>
     </view>
-    <view style="margin-top:100rpx">
-        <view wx:if="{{goods.length!=0}}">
-            <view>结果</view>
-            <radio-group class="radio-group" bindchange="goodChange">
-                <label class="radio row" wx:for="{{goods}}" wx:key="{{index}}">
-                    <view>
-                        <radio value="{{index}}" checked="{{item.checked}}" />
-                    </view>
-                    <view>{{item.name}}</view>
-                    <view catch:tap="showDetail" id="{{index}}">
-                        查看详情
-                    </view>
-                </label>
-            </radio-group>
-            <button bindtap="onConfirm">确定</button>
-        </view>
-        <view wx:if="{{goods.length===0 && !loading}}">
-            当前标签组合没有结果
-        </view>
+    <!-- <s-label-cloud width="750" height="500" data="{{testData}}"></s-label-cloud> -->
+    <l-button class="update-btn" size="medium" bind:tap="updateGoods">更新</l-button>
+    <view wx:if="{{goods.length!=0}}">
+        <l-radio-group bind:linchange="goodChange">
+            <block wx:for="{{goods}}" wx:key="{{index}}">
+                <view class="list-item">
+                    <l-radio class="list-radio" value="{{index}}" custom="{{true}}">
+                    </l-radio>
+                    <s-list-item name="{{item.name}}" labels="{{item.labels}}" bind:detail="showDetail" index="{{index}}">
+                    </s-list-item>
+                </view>
+            </block>
+        </l-radio-group>
     </view>
+    <view wx:if="{{goods.length===0 && !loading}}">
+        当前标签组合没有结果
+    </view>
+    <l-button class="confirm-btn" size="large" bindtap="onConfirm" shape="semicircle">确定</l-button>
 </view>

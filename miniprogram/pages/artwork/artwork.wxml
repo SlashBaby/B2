@@ -1,16 +1,20 @@
 <view>
     <view wx:if="{{artwork.length!==0}}">
         <block wx:for="{{artworks}}" wx:key="{{index}}">
-            <view>
-                <view class="{{item.rotate === true ? 'rotation' : ''}}">
-                    <image src="{{item.path}}" mode="aspectFit" bindtap="onShowImage"></image>
+            <l-card plaintext="true">
+                <view class="{{item.rotate === true ? 'rotation' : ''}}" >
+                    <image src="{{item.path}}" mode="aspectFit" bindload="showImageInfo"></image>
                 </view>
                 <view class="row">
-                    <button open-type='share' data-path="{{item.path}}" data-rotate="{{item.rotate}}">分享</button>
-                    <button bind:tap="saveImageToLocal" id="{{item.path}}">保存到本地</button>
-                    <button bind:tap="delete" data-index="{{index}}">删除</button>
+                    <l-button open-type='share' data-path="{{item.path}}" special="{{true}}" data-rotate="{{item.rotate}}"><l-icon name="share" /></l-button>
+                    <l-button bind:tap="saveImageToLocal" id="{{item.path}}" special="{{true}}">
+                        <l-icon name="download" />
+                    </l-button>
+                    <l-button bind:tap="delete" data-index="{{index}}" special="{{true}}">
+                        <l-icon name="delete" />
+                    </l-button>
                 </view>
-            </view>
+            </l-card>
         </block>
     </view>
     <view wx:if="{{!loading && artworks.length==0}}">

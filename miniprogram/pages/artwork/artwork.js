@@ -83,6 +83,10 @@ Page({
     })
   },
 
+  showImageInfo(e){
+    console.log(e);
+  },
+
   onShareAppMessage(e) {
     if (e.from === 'button') {
       const path = e.target.dataset.path;

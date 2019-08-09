@@ -1,1 +1,19 @@
 /* miniprogram/pages/draw/draw.wxss */
+.container{
+	display: flex;
+	flex-direction: column;
+	width: 100%
+}
+
+.draw-btn{
+	bottom: 50rpx;
+	position: fixed;
+}
+
+.selector{
+	margin-top: 80rpx;
+}
+
+.circle{
+	margin-top:50rpx;
+}

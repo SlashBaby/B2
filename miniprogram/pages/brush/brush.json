@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+  	"s-cover-button": "../../componets/cover-button/index"
+  }
 }

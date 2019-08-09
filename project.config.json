@@ -17,13 +17,15 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"nodeModules": true
 	},
 	"appid": "wxfa468967fadbc4a5",
 	"projectname": "Brush",
 	"libVersion": "2.8.0",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
+	"compileType": "miniprogram",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -41,7 +43,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 2,
 			"list": [
 				{
 					"id": 1,
@@ -51,10 +53,17 @@
 					"scene": null
 				},
 				{
-					"id": 2,
+					"id": 1,
 					"name": "brush",
 					"pathName": "pages/brush/brush",
 					"query": "url=http://culturecloud.img-cn-hangzhou.aliyuncs.com/H5/201811169167QuK5iWF4r5Yrf8VlVm1oNHuaQNdKsh.jpg&stroke=星月夜&sample=BFS",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "artwork",
+					"pathName": "pages/artwork/artwork",
+					"query": "",
 					"scene": null
 				}
 			]

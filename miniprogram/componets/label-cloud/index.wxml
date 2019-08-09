@@ -1,0 +1,4 @@
+<view class="container">
+  <ff-canvas style="width:{{width}}rpx; height:{{height}}rpx" opts="{{ opts }}"></ff-canvas>
+  <canvas hidden canvas-id="cloud-canvas" style="width:{{width}}rpx; height:{{height}}rpx"></canvas>
+</view>

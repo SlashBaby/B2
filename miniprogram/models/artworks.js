@@ -11,11 +11,14 @@ class ArtworksModel extends DBModel {
     return this.db.collection('artworks').doc(id).remove();
   }
 
-  add(fileid, rotate) {
+  add(fileid, rotate, info) {
     return this.db.collection('artworks').add({
       data: {
         fileid,
-        rotate
+        rotate,
+        img: info.img,
+        stroke: info.stroke,
+        sample: info.sample
       }
     })
   }

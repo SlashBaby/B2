@@ -14,17 +14,31 @@ Page({
     b2: null,
     loading: true,
     style: '',
-    rotate: false
+    rotate: false,
+    img: null,
+    stroke: null,
+    sample: null
   },
 
   onLoad: function(options) {
     wx.showLoading({
       title: '加载图片中'
     })
-    this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
+
+    //从缓存中获取传递过来的数据
+    const data = wx.getStorageSync('data');
+    wx.removeStorageSync('data');
+    this.data.sample = data.sample;
+    this.data.stroke = data.stroke;
+    this.data.img = data.img;
+
+    // 初始化画笔
+    this.data.b2 = new B2('canvas', this.data.sample.name, this.data.stroke.name, this.data.img.url);
+    // this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
+
     //获得上下文信息
     this.data.b2.getCanvasInfo()
-      .then(res => {// 更新页面数据
+      .then(res => { // 更新页面数据
         const { canvasWidth, canvasHeight, rotate } = res;
         return new Promise((resolve, reject) => {
           this.setData({
@@ -54,7 +68,7 @@ Page({
 
     this.data.b2.loadingImageData()
       .then(res => {
-        return this.data.b2.run(100, 100);
+        return this.data.b2.run(100, 10);
       }).then(res => {
         this.setData({
           isDone: true
@@ -70,7 +84,11 @@ Page({
     this.data.b2.getTempFilePath().then(res => {
       return fileModel.add(res.tempFilePath, this.getFileName());
     }).then(res => {
-      return artworksModel.add(res.fileID, this.data.rotate);
+      return artworksModel.add(res.fileID, this.data.rotate, {
+        img: [this.data.img.name, this.data.img._id],
+        stroke: [this.data.stroke.name, this.data.stroke._id],
+        sample: [this.data.sample.name, this.data.sample._id]
+      });
     }).then(res => {
       wx.hideLoading();
       wx.showToast({

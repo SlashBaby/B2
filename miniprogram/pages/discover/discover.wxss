@@ -5,3 +5,24 @@
 	justify-content: space-between;
 	width:500rpx;
 }
+
+.confirm-btn{
+	position: fixed;
+	bottom: 10rpx;
+}
+
+.list-item{
+	width: 720rpx;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	margin-top: 20rpx;
+	box-shadow:0px 0px 2px #e1e1e1;
+	border-radius: 10rpx;
+}
+
+.list-radio{
+	margin-left: 20rpx;
+}
+

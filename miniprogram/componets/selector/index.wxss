@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-wrapper {
+    background: red;
+    width: 200rpx;
+    border-radius: 100rpx 0rpx 0rpx 100rpx;
+    height: 100rpx;
+    background-color: #2c61b4;
+}
+
+.right-wrapper {
+    background: blue;
+    width: 200rpx;
+    border-radius: 0rpx 100rpx 100rpx 0rpx;
+    height: 100rpx;
+    background-color: white;
+}
+
+.left-text {
+    margin-left: 50rpx;
+    line-height: 100rpx;
+    display: block;
+    color: white;
+}
+
+.right-text {
+    float: right;
+    margin-right: 50rpx;
+    line-height: 100rpx;
+    color: #2c61b4;
+    display: block;
+}
