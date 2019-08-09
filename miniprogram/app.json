@@ -1,36 +1,44 @@
 {
-    "pages": [
-        "pages/draw/draw",
-        "pages/discover/discover",
-        "pages/artwork/artwork",
-        "pages/brush/brush",
-        "pages/detail/detail",
-        "pages/my/my",
-        "pages/share/share"
-    ],
-    "window":
+  "pages": [
+    "pages/draw/draw",
+    "pages/discover/discover",
+    "pages/artwork/artwork",
+    "pages/brush/brush",
+    "pages/detail/detail",
+    "pages/my/my",
+    "pages/share/share"
+  ],
+  "window":
+  {
+    "backgroundColor": "#2c61b4",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2c61b4",
+    "navigationBarTitleText": "黑客的画笔",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar":
+  {
+    "selectedColor": "#2c61b4",
+    "color": "#8a8a8a",
+    "list": [
     {
-        "backgroundColor": "#F6F6F6",
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#F6F6F6",
-        "navigationBarTitleText": "黑客的画笔",
-        "navigationBarTextStyle": "black"
+      "pagePath": "pages/artwork/artwork",
+      "text": "作品",
+      "iconPath": "./images/image.png",
+      "selectedIconPath": "./images/image-s.png"
     },
-    "tabBar":
     {
-        "list": [
-        {
-            "pagePath": "pages/artwork/artwork",
-            "text": "作品"
-        },
-        {
-            "pagePath": "pages/draw/draw",
-            "text": "画"
-        },
-        {
-            "pagePath": "pages/my/my",
-            "text": "我"
-        }]
+      "pagePath": "pages/draw/draw",
+      "text": "画",
+      "iconPath": "./images/theme.png",
+      "selectedIconPath": "./images/theme-s.png"
     },
-    "sitemapLocation": "sitemap.json"
+    {
+      "pagePath": "pages/my/my",
+      "text": "我",
+      "iconPath": "./images/me.png",
+      "selectedIconPath": "./images/me-s.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json"
 }

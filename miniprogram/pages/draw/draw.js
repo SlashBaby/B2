@@ -6,7 +6,8 @@ Page({
   data: {
     selectedImg: null,
     selectedStroke: null,
-    selectedSample: null
+    selectedSample: null,
+    defaultUrl: "../../images/2.png"
   },
 
   onLoad: function(options) {

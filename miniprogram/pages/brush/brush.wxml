@@ -1,4 +1,4 @@
-<view >
+<view wx:if="{{!success}}">
     <view class="canvas-wrapper">
         <canvas canvas-id="canvas" style="width:{{canvasWidth}}rpx;height:{{canvasHeight}}rpx"></canvas>
     </view>
@@ -10,3 +10,4 @@
     	<s-cover-button class="delete-btn" bind:tap="onCancel" name="放弃"></s-cover-button>
     </view>
 </view>
+<l-status-show show="{{success}}" type="success" button-text="返回" bind:lintap="onCancel" describe="保存成功！"></l-status-show>

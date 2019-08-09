@@ -45,12 +45,27 @@ Page({
       })
   },
 
-  delete(e) {
+  onShowDelete(e) {
+    const index = e.target.dataset.index;
+    wx.lin.showDialog({
+      type: "confirm",
+      title: "提示",
+      content: "确定删除？",
+      success: (res) => {
+        if (res.confirm) {
+          this.delete(index);
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  delete(index) {
     // 获得删除数据的索引
     wx.showLoading({
       title: '删除中'
     })
-    const index = e.target.dataset.index;
     const artwork = this.data.artworks[index];
 
     //删除数据
@@ -83,8 +98,20 @@ Page({
     })
   },
 
-  showImageInfo(e){
+  showImageInfo(e) {
     console.log(e);
+  },
+
+  onDetail(e) {
+    console.log(e);
+    const id = e.target.dataset.id;
+    wx.navigateTo({
+      url: `../detail/detail?id=${id}`
+    })
+  },
+
+  onPullDownRefresh() {
+    this.onLoad();
   },
 
   onShareAppMessage(e) {

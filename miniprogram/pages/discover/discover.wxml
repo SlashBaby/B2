@@ -28,5 +28,5 @@
     <view wx:if="{{goods.length===0 && !loading}}">
         当前标签组合没有结果
     </view>
-    <l-button class="confirm-btn" size="large" bindtap="onConfirm" shape="semicircle">确定</l-button>
+    <l-button class="confirm-btn" size="large" bindtap="onConfirm">确定</l-button>
 </view>

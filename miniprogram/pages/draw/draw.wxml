@@ -1,6 +1,6 @@
 <view class="container">
-    <s-circle class="circle" imgUrl="{{selectedImg.url}}" bindtap="onSelect" data-type="img"></s-circle>
+    <s-circle class="circle" imgUrl="{{selectedImg === null ? defaultUrl : selectedImg.url}}" bindtap="onSelect" data-type="img"></s-circle>
     <s-selector class="selector" bindtap="onSelect" data-type="stroke" name="笔触" value="{{selectedStroke === null ? '未选择' : selectedStroke.name}}"></s-selector>
     <s-selector class="selector" bindtap="onSelect" data-type="sample" name="取样方法" value="{{selectedSample === null ? '未选择' : selectedSample.name}}"></s-selector>
-    <l-button class="draw-btn" size="large" shape="semicircle" icon="edit" icon-size="20" icon-color="#fff" bind:tap="draw">绘制</l-button>
+    <l-button class="draw-btn" size="large" icon="edit" icon-size="20" icon-color="#fff" bind:tap="draw">绘制</l-button>
 </view>

@@ -17,7 +17,8 @@ Page({
     rotate: false,
     img: null,
     stroke: null,
-    sample: null
+    sample: null,
+    success: false
   },
 
   onLoad: function(options) {
@@ -33,8 +34,8 @@ Page({
     this.data.img = data.img;
 
     // 初始化画笔
-    this.data.b2 = new B2('canvas', this.data.sample.name, this.data.stroke.name, this.data.img.url);
-    // this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
+    // this.data.b2 = new B2('canvas', this.data.sample.name, this.data.stroke.name, this.data.img.url);
+    this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
 
     //获得上下文信息
     this.data.b2.getCanvasInfo()
@@ -68,7 +69,7 @@ Page({
 
     this.data.b2.loadingImageData()
       .then(res => {
-        return this.data.b2.run(100, 10);
+        return this.data.b2.run(100, 100);
       }).then(res => {
         this.setData({
           isDone: true
@@ -91,10 +92,9 @@ Page({
       });
     }).then(res => {
       wx.hideLoading();
-      wx.showToast({
-        title: '保存成功'
+      this.setData({
+        success: true
       })
-      this.onCancel();
     })
   },
 
