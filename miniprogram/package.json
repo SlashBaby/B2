@@ -19,7 +19,6 @@
   "homepage": "https://github.com/SlashBaby/B2#readme",
   "dependencies": {
     "@antv/f2-canvas": "^1.0.5",
-    "d3-cloud": "^1.2.5",
     "lin-ui": "^0.5.13"
   }
 }

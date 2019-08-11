@@ -30,3 +30,5 @@
     </l-status-show>
 </view>
 <l-dialog class="dialog"/>
+<l-loading show="{{loading}}" full-screen="true" />
+<l-message />

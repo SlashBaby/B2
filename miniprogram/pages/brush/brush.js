@@ -18,13 +18,11 @@ Page({
     img: null,
     stroke: null,
     sample: null,
-    success: false
+    success: false,
+    imgUrl: ''
   },
 
   onLoad: function(options) {
-    wx.showLoading({
-      title: '加载图片中'
-    })
 
     //从缓存中获取传递过来的数据
     const data = wx.getStorageSync('data');
@@ -36,7 +34,9 @@ Page({
     // 初始化画笔
     // this.data.b2 = new B2('canvas', this.data.sample.name, this.data.stroke.name, this.data.img.url);
     this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
-
+    this.setData({
+      imgUrl: options.url
+    })
     //获得上下文信息
     this.data.b2.getCanvasInfo()
       .then(res => { // 更新页面数据
@@ -58,10 +58,9 @@ Page({
         this.setData({
           loading: false
         })
-        wx.hideLoading();
       })
   },
-
+  
   start(e) {
     this.setData({
       isRunning: true

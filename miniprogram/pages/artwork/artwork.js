@@ -7,14 +7,14 @@ Page({
 
   data: {
     artworks: [],
-    loading: true
+    loading: true,
+    deleting: false
   },
 
   onLoad: function(options) {
-    wx.showLoading({
-      title: '加载中',
+    this.setData({
+      loading: true
     })
-
     let artworks = null;
     login()
       // 获得openid
@@ -41,7 +41,6 @@ Page({
           artworks,
           loading: false
         });
-        wx.hideLoading();
       })
   },
 
@@ -64,7 +63,7 @@ Page({
   delete(index) {
     // 获得删除数据的索引
     wx.showLoading({
-      title: '删除中'
+      title: "删除中"
     })
     const artwork = this.data.artworks[index];
 
@@ -78,8 +77,9 @@ Page({
         artworks: this.data.artworks
       })
       wx.hideLoading();
-      wx.showToast({
-        title: '删除成功'
+      wx.lin.showMessage({
+        content: '删除成功',
+        type:'success'
       })
     })
 

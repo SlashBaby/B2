@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-  	"l-button": "../../miniprogram_npm/lin-ui/button/index",
   	"s-circle": "../../componets/circle/index",
   	"s-selector": "../../componets/selector/index"
   }

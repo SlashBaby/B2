@@ -1,18 +1,7 @@
 <view class="container">
-    <view class="header">
-        发现
-    </view>
     <view wx:if="{{!loading}}">
-        <view>标签</view>
-        <checkbox-group bindchange="labelChange">
-            <label class="checkbox row" wx:for="{{labels}}" wx:key="{{index}}">
-                <checkbox value="{{item.value}}" checked="{{item.checked}}" />{{item.value}}
-                <view>数量：{{item.count}}</view>
-            </label>
-        </checkbox-group>
+        <s-grids data="{{labels}}" col="4" row="3" bind:tagChange="onTagChange"/>
     </view>
-    <!-- <s-label-cloud width="750" height="500" data="{{testData}}"></s-label-cloud> -->
-    <l-button class="update-btn" size="medium" bind:tap="updateGoods">更新</l-button>
     <view wx:if="{{goods.length!=0}}">
         <l-radio-group bind:linchange="goodChange">
             <block wx:for="{{goods}}" wx:key="{{index}}">
@@ -25,8 +14,8 @@
             </block>
         </l-radio-group>
     </view>
-    <view wx:if="{{goods.length===0 && !loading}}">
-        当前标签组合没有结果
-    </view>
+    <s-status-show wx:if="{{goods.length===0 && !loading}}" content="当前标签组合没有结果～" btn-show="{{false}}"imgUrl="../../images/network.png"></s-status-show>
     <l-button class="confirm-btn" size="large" bindtap="onConfirm">确定</l-button>
 </view>
+<l-loading full-screen="{{true}}" show="{{loading}}"/>
+<l-message/>

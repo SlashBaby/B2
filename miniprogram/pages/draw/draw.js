@@ -10,22 +10,33 @@ Page({
     defaultUrl: "../../images/2.png"
   },
 
-  onLoad: function(options) {
-  },
+  onLoad: function(options) {},
 
-  onSelect:function(e){
+  onSelect: function(e) {
     const type = e.target.dataset.type;
     wx.navigateTo({
       url: `../discover/discover?type=${type}`
     })
   },
-  
+
 
   draw: function(e) {
-    if(this.data.selectedImg === null || this.data.selectedStroke === null || this.data.selectedSample === null){
-      wx.showToast({
-        title: '三个都要选择',
-        icon: 'none'
+    if (this.data.selectedImg === null) {
+      wx.lin.showMessage({
+        content: '请选择一张图片',
+        type: "error"
+      })
+      return
+    } else if (this.data.selectedStroke === null) {
+      wx.lin.showMessage({
+        content: '请选择一种绘画风格',
+        type: "error"
+      })
+      return
+    } else if (this.data.selectedSample === null) {
+      wx.lin.showMessage({
+        content: '请选择一种绘制手段',
+        type: "error"
       })
       return
     }
@@ -35,8 +46,9 @@ Page({
       stroke: this.data.selectedStroke,
       sample: this.data.selectedSample
     })
+    
     wx.navigateTo({
-      url: `../brush/brush?url=${this.data.selectedImg.url}&stroke=${this.data.selectedStroke.name}&sample=${this.data.selectedSample.name}`
+      url: `../brush/brush`
     })
   }
 })

@@ -24,7 +24,6 @@ class B2 {
         }
         return this.sendCanvasInfoBack();
       })
-
   }
 
   sendCanvasInfoBack() {

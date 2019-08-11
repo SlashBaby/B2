@@ -1,10 +1,9 @@
 {
   "usingComponents": {
-  	"s-label-cloud": "../../componets/label-cloud/index",
+  	"s-grids": "../../componets/grids/index",
   	"s-list-item": "../../componets/list-item/index",
   	"l-button": "../../miniprogram_npm/lin-ui/button/index",
   	"l-radio-group": "../../miniprogram_npm/lin-ui/radio-group/index",
-  	"l-radio": "../../miniprogram_npm/lin-ui/radio/index",
-  	"s-label-cloud": "../../componets/label-cloud/index"
+  	"l-radio": "../../miniprogram_npm/lin-ui/radio/index"
   }
 }
