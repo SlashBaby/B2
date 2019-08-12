@@ -2,9 +2,24 @@ import { DBModel } from "./db.js"
 class LabelsModel extends DBModel {
 
   get(type) {
-    return this.db.collection('labels').where({
-      type
-    }).get();
+    return wx.cloud.callFunction({
+      name: 'getAll',
+      data: {
+        type,
+        dbname: 'labels'
+      }
+    }).then(res => {
+      return new Promise((r, j) =>{
+        console.log(res);
+        r(res.result);
+      })
+    })
+  }
+
+  add(data){
+  	return this.db.collection('labels').add({
+  		data
+  	})
   }
 }
 

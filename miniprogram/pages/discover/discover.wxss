@@ -8,7 +8,7 @@
 
 .confirm-btn{
 	position: fixed;
-	bottom: 10rpx;
+	bottom: 0rpx;
 }
 
 .list-item{

@@ -38,6 +38,14 @@
         "text": "我",
         "iconPath": "./images/me.png",
         "selectedIconPath": "./images/me-s.png"
+      },
+      {
+        "pagePath": "pages/backend1/backend1",
+        "text": "图片后台"
+      },
+      {
+        "pagePath": "pages/backend2/backend2",
+        "text": "其余后台"
       }
     ]
   },
@@ -48,7 +56,9 @@
     "l-button": "./miniprogram_npm/lin-ui/button/index",
     "ff-canvas": "./miniprogram_npm/@antv/f2-canvas/index",
     "l-icon": "./miniprogram_npm/lin-ui/icon/index",
-    "l-card": "./miniprogram_npm/lin-ui/card/index"
+    "l-card": "./miniprogram_npm/lin-ui/card/index",
+    "l-input": "./miniprogram_npm/lin-ui/input/index",
+    "l-dialog": "./miniprogram_npm/lin-ui/dialog/index"
   },
   "sitemapLocation": "sitemap.json"
 }
