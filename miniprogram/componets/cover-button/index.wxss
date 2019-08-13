@@ -17,6 +17,6 @@
     background-color: #e25d6f;
 }
 
-.primary{
-     background-color: #4983d0;
+.warn{
+    background-color: #fbe58d;
 }

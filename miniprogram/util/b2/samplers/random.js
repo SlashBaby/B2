@@ -1,6 +1,8 @@
-const random = function(width, height, pixelsData) {
+const random = function(width, height, pixelsData, ratio) {
+  
   const res = [];
-  const cnt = 1000;
+  const base = 4000;
+  const cnt = base * ratio | 0;
   for (let i = 0; i < cnt; i++) {
     const index = parseInt(Math.random() * width * height);
     const data = {
@@ -15,7 +17,7 @@ const random = function(width, height, pixelsData) {
   }
   return {
     data: res,
-    sampleRate : 10
+    sampleRate : 10 * ratio | 0
   };
 }
 export { random }

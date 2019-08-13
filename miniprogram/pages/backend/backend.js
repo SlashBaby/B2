@@ -19,6 +19,10 @@ Page({
     selectedTagsAll: [],
     selectedTags: []
   },
+
+  onKeyWordChange(e) {
+    this.data.cur.name = e.detail.detail.value;
+  },
   onLoad: function(options) {
     const good = goodsModel.getCurrent();
     const labels = labelsModel.get("img");
@@ -148,13 +152,16 @@ Page({
     content.then(res => {
       wx.hideLoading();
       this.data.cur.info = res.result === null ? '暂时没有相关信息。' : res.result;
-      this.data.cur.name = this.data.inputKey;
-      this._addTag(this.data.cur.name);
       this.setData({
         cur: this.data.cur,
         inputKey: ''
       })
     })
+  },
+
+  onAddName(e) {
+    if (this.data.cur.name === '') return;
+    this._addTag(this.data.cur.name);
   },
 
   _addTag(tag) {

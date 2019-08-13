@@ -7,14 +7,13 @@ const map = (value, start, end, min, max) => {
 	}
 }
 
-const point = (ctx, data, progress) => {
+const rect = (ctx, data, progress) => {
   const r = map(progress, 0, 1, 15, 5);
+  console.log(r);
   ctx.beginPath();
-  ctx.fillStyle = `rgb(${data.r}, ${data.g}, ${data.b})`
-  // ctx.fillStyle = 'black';
-  ctx.arc(data.x, data.y, r, 0, Math.PI * 2);
-  // ctx.rect(data.x, data.y, r, r);
+  ctx.fillStyle = `rgb(${data.r}, ${data.g}, ${data.b})`;
+  ctx.rect(data.x, data.y, r * 2, r * 2);
   ctx.fill();
 }
 
-export { point }
+export { rect }

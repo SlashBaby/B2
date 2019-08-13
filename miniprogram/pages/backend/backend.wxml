@@ -4,11 +4,14 @@
             <image class="offset" src="{{cur.url}}" mode="aspectFit"></image>
         </view>
         <view class="line offset"></view>
-        <l-input label="关键字" placeholder="请输入关键字" bind:linchange="onKeyChange" value="{{cur.name}}">
-            <l-button slot="right" bind:lintap="onQuery">查询</l-button>
+        <l-input label="关键字" placeholder="请输入关键字" bind:linchange="onKeyWordChange" value="{{cur.name}}">
+        <l-button slot="right" bind:lintap="onAddName" >确定</l-button>
         </l-input>
         <l-input label="新增标签" placeholder="新增加的标签" bind:linchange="onTagChange" value="{{inputTag}}">
             <l-button slot="right" bind:lintap="onAddTag" >增加</l-button>
+        </l-input>
+        <l-input label="查询" placeholder="请输入查询关键字" bind:linchange="onKeyChange">
+            <l-button slot="right" bind:lintap="onQuery">查询</l-button>
         </l-input>
         <view class="line"></view>
         <view>

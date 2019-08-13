@@ -2,13 +2,6 @@
 .container{
 	display: flex;
 	flex-direction: column;
-	width: 100%
-}
-
-.selector{
-	margin-top: 80rpx;
-}
-
-.circle{
-	margin-top:50rpx;
+	width: 100%;
+	justify-content: space-around;
 }

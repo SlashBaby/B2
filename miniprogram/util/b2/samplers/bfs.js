@@ -1,56 +1,60 @@
-const _popRandom = array => {
-    const n = array.length,
-        i = Math.random() * n | 0, // Math.foor
-        t = array[i];
-    array[i] = array[n - 1], array[n - 1] = t;
-    return array.pop();
+const popRandom = array => {
+  const n = array.length,
+    i = Math.random() * n | 0, // Math.foor
+    t = array[i];
+  array[i] = array[n - 1], array[n - 1] = t;
+  return array.pop();
 }
 
-const _infoByIndex = (index, width, data) => ({
-    x: index % width,
-    y: index / width | 0,
-    r: data[index * 4 + 0],
-    g: data[index * 4 + 1],
-    b: data[index * 4 + 2],
-    a: data[index * 4 + 3]
-})
+const bfs = function(width, height, pixelsData, ratio) {
+  const frontier = [],
+    res = [],
+    cnt = width * height,
+    step = 5,
+    visited = new Array(cnt);
 
-const bfs = (_cnt, _width, _height, pixelsData) => {
-    const res = [],
-        step = 10,
-        width = Math.ceil(_width / step),
-        height = Math.ceil(_height / step),
-        cnt = width * height,
-        visited = new Array(cnt),
-        q = [],
-        p = 0;
+  const startIndex = Math.random() * cnt | 0;
+  frontier.push(startIndex);
 
-    q.push(p)
-    while (q.length != 0) {
-        const index = _popRandom(q);
-        res.push(_infoByIndex(index * step * step, _width, pixelsData));
+  while (frontier.length != 0) {
+    const index = popRandom(frontier);
+    const x = index % width,
+      y = index / width | 0;
 
-        let next;
-        if (!visited[next = index + 1] && next < cnt) {
-            q.push(next);
-            visited[next] = true;
-        }
+    res.push({
+      x,
+      y,
+      r: pixelsData[index * 4 + 0],
+      g: pixelsData[index * 4 + 1],
+      b: pixelsData[index * 4 + 2],
+      a: pixelsData[index * 4 + 3]
+    })
 
-        if (!visited[next = index - 1] && next >= 0) {
-            q.push(next);
-            visited[next] = true;
-        }
-
-        if (!visited[next = index + width] && next < cnt) {
-            q.push(next);
-            visited[next] = true;
-        }
-        if (!visited[next = index - width] && next >= 0) {
-            q.push(next);
-            visited[next] = true;
-        }
+    let next;
+    if ((x - step) >= 0 && !visited[next = (index - step)]) {
+      frontier.push(next);
+      visited[next] = true;
     }
-    return res.reverse();
-}
 
+    if ((x + step) < width && !visited[next = (index + step)]) {
+      frontier.push(next);
+      visited[next] = true;
+    }
+
+    if ((y - step) >= 0 && !visited[next = (index - width * step)]) {
+      frontier.push(next);
+      visited[next] = true;
+    }
+
+    if ((y + step) < height && !visited[next = (index + width * step)]) {
+      frontier.push(next);
+      visited[next] = true;
+    }
+  }
+
+  return {
+    data: res.reverse(),
+    sampleRate: 20 * ratio | 0
+  };
+}
 export { bfs }

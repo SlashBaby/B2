@@ -7,10 +7,21 @@ Page({
     selectedImg: null,
     selectedStroke: null,
     selectedSample: null,
-    defaultUrl: "../../images/2.png"
+    defaultUrl: "../../images/2.png",
+    height: 0
   },
 
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    wx.getSystemInfo({
+      success: res => {
+        const { windowWidth, windowHeight } = res;
+        const height = 375 / windowWidth * windowHeight * 2;
+        this.setData({
+          height
+        })
+      }
+    })
+  },
 
   onSelect: function(e) {
     const type = e.target.dataset.type;

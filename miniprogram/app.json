@@ -37,10 +37,6 @@
         "text": "我",
         "iconPath": "./images/me.png",
         "selectedIconPath": "./images/me-s.png"
-      },
-      {
-        "pagePath": "pages/backend/backend",
-        "text": "图片后台"
       }
     ]
   },

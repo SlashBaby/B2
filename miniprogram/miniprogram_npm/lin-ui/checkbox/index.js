@@ -81,7 +81,6 @@ Component({
     },
     // 点击 checkbox
     onCheckBoxChangeTap() {
-      this.triggerEvent('myTap');
       if (this.data.disabled) return;
       const item = {
         current: !this.data.checked,
