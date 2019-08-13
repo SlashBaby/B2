@@ -18,8 +18,7 @@ Page({
     img: null,
     stroke: null,
     sample: null,
-    success: false,
-    imgUrl: ''
+    success: false
   },
 
   onLoad: function(options) {
@@ -30,15 +29,18 @@ Page({
     this.data.sample = data.sample;
     this.data.stroke = data.stroke;
     this.data.img = data.img;
+    this.data.img = {
+      fileid: 'cloud://wechatcloud-79m2p.7765-wechatcloud-79m2p-1259642785/imgs/201811169167QuK5iWF4r5Yrf8VlVm1oNHuaQNdKsh.jpg'
+    }
+    
 
     // 初始化画笔
-    // this.data.b2 = new B2('canvas', this.data.sample.name, this.data.stroke.name, this.data.img.url);
-    this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
-    this.setData({
-      imgUrl: options.url
-    })
-    //获得上下文信息
-    this.data.b2.getCanvasInfo()
+    fileModel.get(this.data.img.fileid)
+      .then(res => {
+        // this.data.b2 = new B2('canvas', this.data.sample.name, this.data.stroke.name, res.tempFilePath);
+        this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
+        return this.data.b2.getCanvasInfo() //获得上下文信息
+      })
       .then(res => { // 更新页面数据
         const { canvasWidth, canvasHeight, rotate } = res;
         return new Promise((resolve, reject) => {
@@ -60,7 +62,7 @@ Page({
         })
       })
   },
-  
+
   start(e) {
     this.setData({
       isRunning: true
@@ -68,7 +70,7 @@ Page({
 
     this.data.b2.loadingImageData()
       .then(res => {
-        return this.data.b2.run(100, 100);
+        return this.data.b2.run();
       }).then(res => {
         this.setData({
           isDone: true

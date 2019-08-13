@@ -227,6 +227,7 @@ Page({
         })
       },
       fail: err => {
+        console.log(err);
         this.onDelete();
         wx.hideLoading();
       }

@@ -4,11 +4,12 @@
 }
 
 .canvas-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-end;
-    margin-top: 20rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 15rpx solid #2c61b4;
+    border-radius: 15rpx;
 }
 
 .start-btn {
@@ -20,11 +21,11 @@
 .save-btn {
     position: absolute;
     bottom: 50rpx;
-    left:150rpx;
+    left: 150rpx;
 }
 
 .delete-btn {
     position: absolute;
     bottom: 50rpx;
-    right:150rpx;
+    right: 150rpx;
 }

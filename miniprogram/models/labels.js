@@ -10,7 +10,6 @@ class LabelsModel extends DBModel {
       }
     }).then(res => {
       return new Promise((r, j) =>{
-        console.log(res);
         r(res.result);
       })
     })

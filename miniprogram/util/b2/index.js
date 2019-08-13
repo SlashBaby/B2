@@ -9,7 +9,7 @@ class B2 {
     this.sampler = samplerManager.get(sample);
     this.stroker = strokerManager.get(stroke);
     this.url = url;
-    this.framCount = 0;
+    this.frameCount = 0;
   }
 
   getCanvasInfo() {
@@ -91,16 +91,19 @@ class B2 {
     return [Math.floor(canvasWidth), Math.floor(canvasHeight), ratio];
   }
 
-  run(maxFramCount, sampleRate) {
-    this.maxFramCount = maxFramCount;
-    this.sampleRate = sampleRate;
+  run() {
     this.setup();
     return this.draw();
   }
 
   setup() {
-    const total = this.maxFramCount * this.sampleRate;
-    this.data = this.sampler(total, this.width, this.height, this.pixelsData);
+    // 取样器获得点，以及确定一帧绘制的点的数量
+    const {data, sampleRate } = this.sampler(this.width, this.height, this.pixelsData);
+    this.data = data;
+    this.sampleRate = sampleRate;
+    this.maxFrameCount = Math.ceil(this.data.length / this.sampleRate);
+
+    // 清空屏幕
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0, 0, this.width, this.height);
   }
@@ -108,8 +111,7 @@ class B2 {
   draw() {
     return new Promise((resolve, reject) => {
       this.timer = setInterval(() => {
-        this.loop()
-        this.frameCount++;
+        this.loop();
         if (this.data.length <= 0) {
           this.stop();
           resolve();
@@ -120,10 +122,12 @@ class B2 {
 
   loop() {
     let i = 0;
+    this.frameCount++;
     while (this.data.length > 0 && i < this.sampleRate) {
       i++;
       const d = this.data.pop();
-      this.stroker(this.ctx, d);
+      const progress = this.frameCount / this.maxFrameCount;
+      this.stroker(this.ctx, d, progress);
     }
     this.ctx.draw(true);
   }

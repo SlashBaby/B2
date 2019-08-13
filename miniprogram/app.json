@@ -7,8 +7,7 @@
     "pages/detail/detail",
     "pages/my/my",
     "pages/share/share",
-    "pages/backend1/backend1",
-    "pages/backend2/backend2"
+    "pages/backend/backend"
   ],
   "window": {
     "backgroundColor": "#2c61b4",
@@ -40,12 +39,8 @@
         "selectedIconPath": "./images/me-s.png"
       },
       {
-        "pagePath": "pages/backend1/backend1",
+        "pagePath": "pages/backend/backend",
         "text": "图片后台"
-      },
-      {
-        "pagePath": "pages/backend2/backend2",
-        "text": "其余后台"
       }
     ]
   },

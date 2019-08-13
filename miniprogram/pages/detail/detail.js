@@ -9,7 +9,6 @@ const goodsModel = new GoodsModel();
 Page({
 
   data: {
-    content: '',
     read: false,
     openid: '',
     did: '',
@@ -23,7 +22,6 @@ Page({
     const did = options.id;
     const good = goodsModel.getById(did);
     const openid = login();
-    let content;
 
     Promise.all([good, openid]).then(res => {
       this.data.good = res[0].data[0];
@@ -40,7 +38,6 @@ Page({
     }).then(res => {
       const data = res.data;
       this.setData({
-        content,
         read: data.length === 0 ? false : true,
       })
     })
