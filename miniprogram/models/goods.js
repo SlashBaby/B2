@@ -8,25 +8,31 @@ class GoodsModel extends DBModel {
     super()
     this.dbname = 'goods'
   }
-  get(type, labels = []) {
+  get(type, index, labels = []) {
     const _ = this.db.command;
     if (labels.length === 0) {
       return this.db.collection(this.dbname).where({
-        type,
-        valid: 1,
-        fileid: _.neq('#')
-      }).get();
+          type,
+          valid: 1,
+          fileid: _.neq('#')
+        })
+        .orderBy('_id', 'desc')
+        .skip(index * 20)
+        .get();
     } else {
       const args = [];
       for (let l of labels) {
         args.push(_.eq(l));
       }
       return this.db.collection(this.dbname).where({
-        type,
-        valid: 1,
-        fileid: _.neq('#'),
-        labels: _.and(...args)
-      }).get();
+          type,
+          valid: 1,
+          fileid: _.neq('#'),
+          labels: _.and(...args)
+        })
+        .orderBy('_id', 'desc')
+        .skip(index * 20)
+        .get();
     }
   }
 

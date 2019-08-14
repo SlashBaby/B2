@@ -10,7 +10,7 @@ const map = (value, start, end, min, max) => {
 const rect = (ctx, data, progress) => {
   const r = map(progress, 0, 1, 10, 5);
   ctx.beginPath();
-  ctx.fillStyle = `rgb(${data.r}, ${data.g}, ${data.b})`;
+  ctx.fillStyle = `rgb(0, 0, ${data.b})`;
   ctx.rect(data.x, data.y, r * 2, r * 2);
   ctx.fill();
 }

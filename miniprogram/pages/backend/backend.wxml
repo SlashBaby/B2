@@ -51,6 +51,7 @@
     </view>
     <view class="row btn-group">
         <l-button bindlintap="onLeft">上一张</l-button>
+        <l-button bindlintap="onFormatLabel">更新标签</l-button>
         <l-button bindlintap="onRight">下一张</l-button>
     </view>
 </view>

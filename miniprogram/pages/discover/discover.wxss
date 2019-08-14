@@ -26,4 +26,8 @@
 	margin-left: 20rpx;
 }
 
+.list{
+	margin-bottom: 100rpx;
+}
+
 

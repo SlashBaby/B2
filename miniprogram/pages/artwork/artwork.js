@@ -8,7 +8,9 @@ Page({
   data: {
     artworks: [],
     loading: true,
-    deleting: false
+    deleting: false,
+    openid: '',
+    index: 0
   },
 
   onLoad: function(options) {
@@ -20,7 +22,8 @@ Page({
       // 获得openid
       .then(res => {
         const openid = res.result.openid;
-        return artworksModel.get(openid);
+        this.data.openid = openid;
+        return artworksModel.get(openid, this.data.index);
       })
       // 根据获得openid获得fileid
       .then(res => {
@@ -41,6 +44,51 @@ Page({
           artworks,
           loading: false
         });
+      })
+  },
+
+  onShow() {
+    const refresh = wx.getStorageSync('refresh');
+    wx.removeStorageSync('refresh');
+    if (refresh) {
+      this.data.index = 0;
+      this.onLoad();
+    }
+  },
+
+  onReachBottom(e) {
+    wx.showLoading({
+      'title': '加载中'
+    })
+    this.data.index++;
+    let artworks = null;
+    artworksModel.get(this.data.openid, this.data.index)
+      .then(res => {
+        artworks = res.data;
+        const files = [];
+        for (let a of artworks) {
+          files.push(fileModel.get(a.fileid));
+        }
+        return Promise.all(files)
+      })
+      // 根据获得fileid获得path
+      .then(res => {
+        if (artworks.length === 0) {
+          wx.lin.showMessage({
+            content: '没有更多啦～',
+            type: 'warning'
+          })
+        } else {
+          artworks.map((item, index) => {
+            item.path = res[index].tempFilePath;
+            return item;
+          })
+
+          this.setData({
+            artworks: [...this.data.artworks, ...artworks]
+          });
+        }
+        wx.hideLoading();
       })
   },
 
@@ -79,7 +127,7 @@ Page({
       wx.hideLoading();
       wx.lin.showMessage({
         content: '删除成功',
-        type:'success'
+        type: 'success'
       })
     })
 
@@ -103,7 +151,6 @@ Page({
   },
 
   onDetail(e) {
-    console.log(e);
     const id = e.target.dataset.id;
     wx.navigateTo({
       url: `../detail/detail?id=${id}`
@@ -114,13 +161,17 @@ Page({
     this.onLoad();
   },
 
-  onShareAppMessage(e) {
+  onShareAppMessage(e){
     if (e.from === 'button') {
       const path = e.target.dataset.path;
-      const rotate = e.target.dataset.rotate;
+      console.log(path);
       return {
-        title: 'hello world',
-        path: `/pages/share/share?path=${path}&rotate=${rotate}`
+        title: '快啦涂鸦上海吧！',
+        imageUrl: path
+      }
+    }else{
+      return {
+        title: '快啦涂鸦上海吧！'
       }
     }
   }

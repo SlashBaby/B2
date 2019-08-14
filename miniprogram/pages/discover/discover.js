@@ -10,12 +10,13 @@ Page({
     selectedItem: null,
     type: '',
     selectedLabels: [],
-    loading: true
+    loading: true,
+    index: 0
   },
 
   onLoad: function(options) {
     this.data.type = options.type;
-    const goods = goodsModel.get(this.data.type);
+    const goods = goodsModel.get(this.data.type, this.data.index);
     const labels = labelsModel.get(this.data.type);
     Promise.all([goods, labels]).then(res => {
       this.setData({
@@ -39,7 +40,8 @@ Page({
     wx.showLoading({
       title: "加载中"
     })
-    const goods = goodsModel.get(this.data.type, this.data.selectedLabels);
+    this.data.index = 0;
+    const goods = goodsModel.get(this.data.type, this.data.index, this.data.selectedLabels);
     goods.then(res => {
       this.setData({
         goods: res.data
@@ -86,9 +88,30 @@ Page({
     })
   },
 
-  onTagChange(e){
+  onTagChange(e) {
     const indexList = e.detail.list;
     this.data.selectedLabels = indexList.map(index => this.data.labels[index].value);
     this.updateGoods();
+  },
+
+  onReachBottom(e) {
+    wx.showLoading({
+      'title': '加载中'
+    })
+    this.data.index++;
+    const goods = goodsModel.get(this.data.type, this.data.index, this.data.selectedLabels);
+    goods.then(res => {
+      if (res.data.length === 0) {
+        wx.lin.showMessage({
+          content: '没有更多啦～',
+          type: 'warning'
+        })
+      } else {
+        this.setData({
+          goods: [...this.data.goods, ...res.data]
+        })
+      }
+      wx.hideLoading();
+    })
   }
 })

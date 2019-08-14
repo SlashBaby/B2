@@ -7,7 +7,9 @@ class FileModel {
         success: res => {
           resolve(res);
         },
-        fail: console.error
+        fail: error => {
+          reject(error);
+        }
       })
     })
   }

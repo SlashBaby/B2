@@ -26,6 +26,10 @@ Page({
     this.showLearn(false);
   },
 
+  onShow(){
+    this.showLearn(true);
+  },
+
   onGo() {
     wx.switchTab({
       url: '../draw/draw'

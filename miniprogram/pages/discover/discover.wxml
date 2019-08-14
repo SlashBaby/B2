@@ -2,7 +2,7 @@
     <view wx:if="{{!loading}}">
         <s-grids data="{{labels}}" col="4" row="3" bind:tagChange="onTagChange"/>
     </view>
-    <view wx:if="{{goods.length!=0}}">
+    <view class="list" wx:if="{{goods.length!=0}}">
         <l-radio-group bind:linchange="goodChange">
             <block wx:for="{{goods}}" wx:key="{{index}}">
                 <view class="list-item">

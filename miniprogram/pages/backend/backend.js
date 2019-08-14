@@ -309,5 +309,68 @@ Page({
     this.setData({
       cur: this.data.cur
     })
+  },
+
+  onFormatLabel(e) {
+    console.log(e);
+    wx.showLoading({
+      title: '更新中'
+    })
+
+    const imgs = this.getAll('img'),
+    samples = this.getAll('sample'),
+    strokes = this.getAll('stroke');
+
+    Promise.all([imgs, samples, strokes]).then(res =>{
+      console.log(res);
+      // wx.hideLoading();
+      let allLabels = [];
+      let types = ['img', 'sample', 'stroke'];
+      for(let i = 0; i < res.length; i++){
+        const r = res[i];
+        let labels = [];
+        const data = r.result.data;
+        for(let d of data){
+          for(let l of d.labels){
+            if(labels.indexOf(l) === -1){
+              labels.push(l);
+            }
+          }
+        }
+        labels = labels.map(item => ({value: item, type: types[i]}))
+        allLabels.push(...labels);
+      }
+      // console.log(allLabels);
+      wx.cloud.callFunction({
+        name: 'updateLabels',
+        data:{
+          labels: allLabels
+        },
+        success: (res) => {
+          wx.hideLoading();
+        },
+        fail: err => {
+          console.log(err);
+          wx.hideLoading();
+        }
+      })
+      
+    })
+  },
+
+  getAll(type) {
+    return new Promise((r, j) => {
+      wx.cloud.callFunction({
+        name: 'getAllGoods',
+        data: {
+          dbname: 'goods',
+          type
+        },
+        success: (res) => {
+          console.log(res);
+          r(res);
+        }
+      })
+    })
   }
 })

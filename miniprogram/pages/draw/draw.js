@@ -12,6 +12,7 @@ Page({
   },
 
   onLoad: function(options) {
+
     wx.getSystemInfo({
       success: res => {
         const { windowWidth, windowHeight } = res;
@@ -21,6 +22,17 @@ Page({
         })
       }
     })
+  },
+
+  onShow(){
+    const msg = wx.getStorageSync('error');
+    wx.removeStorageSync('error');
+    if(msg){
+      wx.lin.showMessage({
+        content: '获取图片失败，换一张吧～',
+        type: "error"
+      })
+    }
   },
 
   onSelect: function(e) {

@@ -49,7 +49,8 @@
     "l-icon": "./miniprogram_npm/lin-ui/icon/index",
     "l-card": "./miniprogram_npm/lin-ui/card/index",
     "l-input": "./miniprogram_npm/lin-ui/input/index",
-    "l-dialog": "./miniprogram_npm/lin-ui/dialog/index"
+    "l-dialog": "./miniprogram_npm/lin-ui/dialog/index",
+    "l-loadmore": "./miniprogram_npm/lin-ui/loadmore/index"
   },
   "sitemapLocation": "sitemap.json"
 }
