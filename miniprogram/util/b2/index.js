@@ -95,7 +95,17 @@ class B2 {
     this.setup();
     // 设置一些全局的需要传入的参数
     this.global = {
-      color: Math.random()
+      color: {
+        seed: Math.random(),
+        first: true,
+        width: this.width,
+        height: this.height
+      },
+      arc: {
+        first: true,
+        width: this.width,
+        height: this.height
+      }
     }
     return this.draw();
   }

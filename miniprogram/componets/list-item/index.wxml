@@ -5,7 +5,7 @@
             {{name}}
         </view>
         <view class="middle">
-            <block wx:for="{{array.slice(labels, 0, 3)}}" wx:key="{{index}}">
+            <block wx:for="{{array.slice(labels, 0, 2)}}" wx:key="{{index}}">
                 <l-tag class="middle-item">{{item}}</l-tag>
             </block>
         </view>

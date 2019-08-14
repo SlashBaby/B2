@@ -1,11 +1,14 @@
 import { random } from "./random.js"
-import { noise } from "./noise.js"
+import { perlin } from "./perlin.js"
 import { bfs } from "./bfs.js"
 import { dfs } from "./dfs.js"
 import { best } from "./best.js"
+import { prim } from "./prim.js"
+import { bisect } from "./bisect.js"
+
 class SamplerManager{
 	get(sample){
-		return bfs
+		return bisect
 	}
 }
 const samplerManager = new SamplerManager();

@@ -18,57 +18,71 @@ const map = (value, start, end, min, max) => {
  * @return  Array           RGB色值数值
  */
 function hslToRgb(h, s, l) {
-    var r, g, b;
+  var r, g, b;
 
-    if(s == 0) {
-        r = g = b = l; // achromatic
-    } else {
-        var hue2rgb = function hue2rgb(p, q, t) {
-            if(t < 0) t += 1;
-            if(t > 1) t -= 1;
-            if(t < 1/6) return p + (q - p) * 6 * t;
-            if(t < 1/2) return q;
-            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-            return p;
-        }
-
-        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-        var p = 2 * l - q;
-        r = hue2rgb(p, q, h + 1/3);
-        g = hue2rgb(p, q, h);
-        b = hue2rgb(p, q, h - 1/3);
+  if (s == 0) {
+    r = g = b = l; // achromatic
+  } else {
+    var hue2rgb = function hue2rgb(p, q, t) {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
     }
 
-    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+    var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    var p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1 / 3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1 / 3);
+  }
+
+  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
 const color = (ctx, data, progress, global) => {
-  ctx.beginPath();
+  if (global.color.first) {
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, global.color.width, global.color.height);
+    global.color.first = false;
+  }
 
-  const shift = global.color * 255 | 0;
-  ctx.save();
-  ctx.translate(data.x, data.y);
-
-  // 设置长短
-  const len = map(progress, 0, 1, 40, 5);
+  const type = Math.random() * 5,
+    shift = global.color.seed * 255 | 0,
+    len = map(progress, 0, 1, 40, 5),
+    lineWidth = map(progress, 0, 1, 1, 0.1) * map(Math.random(), 0, 1, 2, 8) | 0;
 
   // 设置颜色
   let b = (data.a * 0.3 + data.g * 0.6 + data.b * 0.1) | 0;
   let hue = (b + shift) % 255;
-  let angle = map(b, 0, 255, -Math.PI , Math.PI);
+  let angle = map(b, 0, 255, -Math.PI, Math.PI);
   hue = map(hue, 0, 255, 0, 1);
   b = map(b, 0, 255, 0, 1);
   const rgb = hslToRgb(hue, b, 0.5);
 
-  // 绘制
-  ctx.lineWidth = map(progress, 0, 1, 10, 2);
-  ctx.lineCap = "round";
-  ctx.strokeStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+  ctx.save();
+  ctx.beginPath();
+  ctx.translate(data.x, data.y);
   ctx.rotate(angle);
-  ctx.moveTo(-len, 0);
-  ctx.lineTo(len, 0);
-  ctx.stroke();
+  if (type < 4) {
+    // 绘制一条线
+    ctx.lineCap = "round";
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    ctx.moveTo(-len, 0);
+    ctx.lineTo(len, 0);
+    ctx.stroke();
 
+  } else {
+    // 绘制点
+    const r = map(progress, 0, 1, 10, 5);
+    ctx.fillStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    ctx.strokeStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
   ctx.restore();
 }
 

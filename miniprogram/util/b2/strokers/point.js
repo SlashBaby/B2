@@ -8,12 +8,17 @@ const map = (value, start, end, min, max) => {
 }
 
 const point = (ctx, data, progress) => {
-  const r = map(progress, 0, 1, 15, 5);
+  const r = map(progress, 0, 1, 10, 5);
+  //大圆
   ctx.beginPath();
-  ctx.fillStyle = `rgb(${data.r}, ${data.g}, ${data.b})`
-  // ctx.fillStyle = 'black';
+  ctx.fillStyle = `rgba(${data.r}, ${data.g},${data.b},${0.6})`;
   ctx.arc(data.x, data.y, r, 0, Math.PI * 2);
-  // ctx.rect(data.x, data.y, r, r);
+  ctx.fill();
+
+  //小圆
+  ctx.beginPath();
+  ctx.fillStyle = `rgba(${data.r},${data.g},${data.b},${0.9})`;
+  ctx.arc(data.x, data.y, r * 0.6, 0, Math.PI * 2);
   ctx.fill();
 }
 

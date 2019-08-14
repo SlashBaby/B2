@@ -15,7 +15,7 @@ const findCloset = (set, d) => {
   }
   return closetPoint;
 }
-// 94
+
 const bestCandidateSampler = (width, height, numCandidates, numSamplesMax) => {
   const samples = [
     [Math.random() * width, Math.random() * height]
