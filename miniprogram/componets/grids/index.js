@@ -62,7 +62,7 @@ Component({
     },
 
     onRight(e) {
-      if (this.data.currentPage === this.data.maxPage - 1) {
+      if (this.data.currentPage === this.data.maxPage) {
         wx.lin.showMessage({
           content: '没有更多标签啦～',
           type: 'error'

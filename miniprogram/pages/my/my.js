@@ -19,14 +19,15 @@ Page({
       []
     ],
     currentIndex: -1,
-    currentTabIndex: 1
+    currentTabIndex: 1,
+    defaultShareImageUrl: 'https://7765-wechatcloud-79m2p-1259642785.tcb.qcloud.la/assets/wxfa468967fadbc4a5.o6zAJs_1ObMKghQped4qZRpgJbbw.2Ayw0fSIVmXHda444a3387f72b78cb32ebd4d91b8c36.png?sign=723b2b23be1518348048a8d465b0ab00&t=1565831746'
   },
 
   onLoad() {
     this.showLearn(false);
   },
 
-  onShow(){
+  onShow() {
     this.showLearn(true);
   },
 
@@ -70,7 +71,7 @@ Page({
           return learnModel.getVisData(openid);
         })
         .then(res => { // 获得所有商品信息
-          learns = res.list;
+          learns = res;
           return goodsModel.getVisData();
         })
         .then(res => { // 获得已学习的商品信息
@@ -92,7 +93,7 @@ Page({
       this.setData({
         noLearns: false
       })
-    }else{
+    } else {
       this.setData({
         noLearns: true
       })
@@ -177,7 +178,7 @@ Page({
       this.setData({
         noWorks: false
       })
-    }else{
+    } else {
       this.setData({
         noWorks: true
       })
@@ -222,7 +223,6 @@ Page({
       array[index].value++;
     }
   },
-
   indexOf(element, array) {
     let index = -1;
     for (let i = 0; i < array.length; i++) {
@@ -231,5 +231,20 @@ Page({
       }
     }
     return index;
+  },
+  onShareAppMessage(e) {
+    if (e.from === 'button') {
+      const path = e.target.dataset.path;
+      console.log(path);
+      return {
+        title: '快来涂鸦上海吧！',
+        imageUrl: path
+      }
+    } else {
+      return {
+        title: '快来涂鸦上海吧！',
+        imageUrl: this.data.defaultShareImageUrl
+      }
+    }
   }
 })

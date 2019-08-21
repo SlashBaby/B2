@@ -55,7 +55,7 @@ const color = (ctx, data, progress, global) => {
     lineWidth = map(progress, 0, 1, 1, 0.1) * map(Math.random(), 0, 1, 2, 8) | 0;
 
   // 设置颜色
-  let b = (data.a * 0.3 + data.g * 0.6 + data.b * 0.1) | 0;
+  let b = (data.r * 0.299 + data.g * 0.587 + data.b * 0.114) | 0;
   let hue = (b + shift) % 255;
   let angle = map(b, 0, 255, -Math.PI, Math.PI);
   hue = map(hue, 0, 255, 0, 1);
@@ -66,11 +66,12 @@ const color = (ctx, data, progress, global) => {
   ctx.beginPath();
   ctx.translate(data.x, data.y);
   ctx.rotate(angle);
+  const alpha = map(data.a, 0, 255, 0, 1);
   if (type < 4) {
     // 绘制一条线
     ctx.lineCap = "round";
     ctx.lineWidth = lineWidth;
-    ctx.strokeStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    ctx.strokeStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
     ctx.moveTo(-len, 0);
     ctx.lineTo(len, 0);
     ctx.stroke();
@@ -78,8 +79,8 @@ const color = (ctx, data, progress, global) => {
   } else {
     // 绘制点
     const r = map(progress, 0, 1, 10, 5);
-    ctx.fillStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
-    ctx.strokeStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+    ctx.fillStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
+    ctx.strokeStyle = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
     ctx.arc(0, 0, r, 0, Math.PI * 2);
     ctx.fill();
   }

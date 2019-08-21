@@ -33,12 +33,13 @@ Page({
     //   fileid: 'cloud://wechatcloud-79m2p.7765-wechatcloud-79m2p-1259642785/imgs/201811169167QuK5iWF4r5Yrf8VlVm1oNHuaQNdKsh.jpg'
     // }
     
-
     // 初始化画笔
     fileModel.get(this.data.img.fileid)
       .then(res => {
+        // const url = 'https://7765-wechatcloud-79m2p-1259642785.tcb.qcloud.la/assets/timg%20(2).jpeg?sign=a4e7ad152ea80a4b97f3f44273964373&t=1565849627'
+        // const url = 'http://culturecloud.img-cn-hangzhou.aliyuncs.com/H5/20181121144741Alk5NAfT4h9xz30CaqgB0jIC9XSWze.jpg';
         this.data.b2 = new B2('canvas', this.data.sample.name, this.data.stroke.name, res.tempFilePath);
-        // this.data.b2 = new B2('canvas', options.sample, options.stroke, options.url);
+        // this.data.b2 = new B2('canvas', options.sample, options.stroke, url);
         return this.data.b2.getCanvasInfo() //获得上下文信息
       }, error => {
         wx.setStorageSync('error', '获取数据失败!');
@@ -70,9 +71,13 @@ Page({
     this.setData({
       isRunning: true
     });
+    wx.showLoading({
+      title: '准备中～'
+    })
 
     this.data.b2.loadingImageData()
       .then(res => {
+        wx.hideLoading();
         return this.data.b2.run();
       }).then(res => {
         this.setData({

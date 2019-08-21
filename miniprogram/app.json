@@ -6,14 +6,13 @@
     "pages/brush/brush",
     "pages/detail/detail",
     "pages/my/my",
-    "pages/share/share",
     "pages/backend/backend"
   ],
   "window": {
     "backgroundColor": "#2c61b4",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#2c61b4",
-    "navigationBarTitleText": "黑客的画笔",
+    "navigationBarTitleText": "照猫画沪",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {

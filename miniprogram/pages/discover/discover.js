@@ -81,7 +81,7 @@ Page({
   },
 
   showDetail(e) {
-    const index = e.detail.index;
+    const index = e.currentTarget.dataset.index;
     const id = this.data.goods[index]._id;
     wx.navigateTo({
       url: `../detail/detail?id=${id}`

@@ -2,7 +2,7 @@
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"enhance": true,
 		"postcss": true,
@@ -44,7 +44,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 1,
 			"list": [
 				{
 					"id": 1,
@@ -57,7 +57,7 @@
 					"id": 1,
 					"name": "brush",
 					"pathName": "pages/brush/brush",
-					"query": "url=http://culturecloud.img-cn-hangzhou.aliyuncs.com/H5/201811169167QuK5iWF4r5Yrf8VlVm1oNHuaQNdKsh.jpg&stroke=星月夜&sample=BFS",
+					"query": "url=https://7765-wechatcloud-79m2p-1259642785.tcb.qcloud.la/assets/timg.jpeg?sign=c33cf06be1692bc25a0085a8085aae3a&t=1565844728&stroke=星月夜&sample=均匀随机",
 					"scene": null
 				},
 				{

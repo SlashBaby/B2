@@ -30,9 +30,10 @@ const arc = (ctx, data, progress, global) => {
   ctx.translate(data.x + r / 2, data.y + r / 2);
   ctx.rotate(angle);
   ctx.translate(-r / 2, -r/ 2);
+  const alpha = map(data.a, 0, 255, 0, 1);
 
   // 画一些曲线
-  ctx.strokeStyle = `rgb(${data.r}, ${data.g}, ${data.b})`;
+  ctx.strokeStyle = `rgba(${data.r}, ${data.g}, ${data.b}, ${alpha})`;
   for (let i = 0; i < cnt; i++) {
     const w = map(i, 0, cnt, 0, r);
     ctx.beginPath();

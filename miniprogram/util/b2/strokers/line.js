@@ -24,7 +24,8 @@ const line = (ctx, data, progress) => {
   const angle = map(seed, 0, 1, -Math.PI, Math.PI);
   ctx.rotate(angle)
 
-  ctx.strokeStyle = `rgba(${data.r}, ${data.g}, ${data.b}, ${50})`;
+  const alpha = map(data.a, 0, 255, 0, 1);
+  ctx.strokeStyle = `rgba(${data.r}, ${data.g}, ${data.b}, ${alpha})`;
   ctx.lineWidth = strokeWidth;
   ctx.lineCap = "round";
 
@@ -33,13 +34,15 @@ const line = (ctx, data, progress) => {
   ctx.stroke();
 
   // 画一个高亮
-  const {r, g, b, a} = {
-    r: Math.min(data.r * 3, 255),
-    g: Math.min(data.g * 3, 255),
-    b: Math.min(data.b * 3, 255),
-    a: Math.random()
+  const colorScale = 2;
+  const { r, g, b, a } = {
+    r: Math.min(data.r * colorScale, 255),
+    g: Math.min(data.g * colorScale, 255),
+    b: Math.min(data.b * colorScale, 255)
   }
-  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`
+  const alphaScale = map(Math.random(), 0, 1, 0, 0.4);
+
+  ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha * alphaScale})`;
   ctx.lineWidth = strokeWidth * 0.3;
   ctx.moveTo(0, -strokeWidth * 0.15);
   ctx.lineTo(strokeLength * lengthVariation, -strokeWidth * 0.15);

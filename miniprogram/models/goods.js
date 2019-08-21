@@ -10,13 +10,14 @@ class GoodsModel extends DBModel {
   }
   get(type, index, labels = []) {
     const _ = this.db.command;
+    const order = type === 'img' ? '_id' : 'weight';
     if (labels.length === 0) {
       return this.db.collection(this.dbname).where({
           type,
           valid: 1,
           fileid: _.neq('#')
         })
-        .orderBy('_id', 'desc')
+        .orderBy(order, 'desc')
         .skip(index * 20)
         .get();
     } else {
@@ -30,7 +31,7 @@ class GoodsModel extends DBModel {
           fileid: _.neq('#'),
           labels: _.and(...args)
         })
-        .orderBy('_id', 'desc')
+        .orderBy(order, 'desc')
         .skip(index * 20)
         .get();
     }

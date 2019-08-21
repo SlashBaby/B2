@@ -73,10 +73,11 @@ Page({
             encoding: "utf-8",
             success: res => {
               resolve(res)
-            }
+            },
+            fail: console.log
           });
         })
-      })
+      }, console.log)
       .then(res => {
         const towxml = new Towxml();
         let data = towxml.toJson(res.data, 'markdown');

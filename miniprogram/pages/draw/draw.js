@@ -8,7 +8,8 @@ Page({
     selectedStroke: null,
     selectedSample: null,
     defaultUrl: "../../images/2.png",
-    height: 0
+    height: 0,
+    defaultShareImageUrl: 'https://7765-wechatcloud-79m2p-1259642785.tcb.qcloud.la/assets/wxfa468967fadbc4a5.o6zAJs_1ObMKghQped4qZRpgJbbw.2Ayw0fSIVmXHda444a3387f72b78cb32ebd4d91b8c36.png?sign=723b2b23be1518348048a8d465b0ab00&t=1565831746'
   },
 
   onLoad: function(options) {
@@ -24,10 +25,10 @@ Page({
     })
   },
 
-  onShow(){
+  onShow() {
     const msg = wx.getStorageSync('error');
     wx.removeStorageSync('error');
-    if(msg){
+    if (msg) {
       wx.lin.showMessage({
         content: '获取图片失败，换一张吧～',
         type: "error"
@@ -69,9 +70,24 @@ Page({
       stroke: this.data.selectedStroke,
       sample: this.data.selectedSample
     })
-    
+
     wx.navigateTo({
       url: `../brush/brush`
     })
+  },
+  onShareAppMessage(e) {
+    if (e.from === 'button') {
+      const path = e.target.dataset.path;
+      console.log(path);
+      return {
+        title: '快来涂鸦上海吧！',
+        imageUrl: path
+      }
+    } else {
+      return {
+        title: '快来涂鸦上海吧！',
+        imageUrl: this.data.defaultShareImageUrl
+      }
+    }
   }
 })

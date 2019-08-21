@@ -10,7 +10,8 @@ Page({
     loading: true,
     deleting: false,
     openid: '',
-    index: 0
+    index: 0,
+    defaultShareImageUrl: 'https://7765-wechatcloud-79m2p-1259642785.tcb.qcloud.la/assets/wxfa468967fadbc4a5.o6zAJs_1ObMKghQped4qZRpgJbbw.2Ayw0fSIVmXHda444a3387f72b78cb32ebd4d91b8c36.png?sign=723b2b23be1518348048a8d465b0ab00&t=1565831746'
   },
 
   onLoad: function(options) {
@@ -18,6 +19,7 @@ Page({
       loading: true
     })
     let artworks = null;
+    this.data.index = 0;
     login()
       // 获得openid
       .then(res => {
@@ -164,14 +166,14 @@ Page({
   onShareAppMessage(e){
     if (e.from === 'button') {
       const path = e.target.dataset.path;
-      console.log(path);
       return {
-        title: '快啦涂鸦上海吧！',
+        title: '快来涂鸦上海吧！',
         imageUrl: path
       }
     }else{
       return {
-        title: '快啦涂鸦上海吧！'
+        title: '快来涂鸦上海吧！',
+        imageUrl: this.data.defaultShareImageUrl
       }
     }
   }

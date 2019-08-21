@@ -318,32 +318,32 @@ Page({
     })
 
     const imgs = this.getAll('img'),
-    samples = this.getAll('sample'),
-    strokes = this.getAll('stroke');
+      samples = this.getAll('sample'),
+      strokes = this.getAll('stroke');
 
-    Promise.all([imgs, samples, strokes]).then(res =>{
+    Promise.all([imgs, samples, strokes]).then(res => {
       console.log(res);
       // wx.hideLoading();
       let allLabels = [];
       let types = ['img', 'sample', 'stroke'];
-      for(let i = 0; i < res.length; i++){
+      for (let i = 0; i < res.length; i++) {
         const r = res[i];
         let labels = [];
         const data = r.result.data;
-        for(let d of data){
-          for(let l of d.labels){
-            if(labels.indexOf(l) === -1){
+        for (let d of data) {
+          for (let l of d.labels) {
+            if (labels.indexOf(l) === -1) {
               labels.push(l);
             }
           }
         }
-        labels = labels.map(item => ({value: item, type: types[i]}))
+        labels = labels.map(item => ({ value: item, type: types[i] }))
         allLabels.push(...labels);
       }
       // console.log(allLabels);
       wx.cloud.callFunction({
         name: 'updateLabels',
-        data:{
+        data: {
           labels: allLabels
         },
         success: (res) => {
@@ -354,7 +354,7 @@ Page({
           wx.hideLoading();
         }
       })
-      
+
     })
   },
 

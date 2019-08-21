@@ -23,7 +23,7 @@ class B2 {
           this.rotate = false;
         }
         return this.sendCanvasInfoBack();
-      })
+      }, console.log);
   }
 
   sendCanvasInfoBack() {
